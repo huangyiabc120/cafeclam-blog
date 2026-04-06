@@ -6,15 +6,17 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const post = getPostData(params.slug)
+  const { slug } = await params
+  const post = getPostData(slug)
   return {
     title: post.title,
     description: post.description,
   }
 }
 
-export default function PostPage({ params }) {
-  const post = getPostData(params.slug)
+export default async function PostPage({ params }) {
+  const { slug } = await params
+  const post = getPostData(slug)
 
   return (
     <article className="post-page">
