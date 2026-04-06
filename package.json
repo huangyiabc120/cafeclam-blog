@@ -8,10 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "14.2.19",
-    "react": "^18",
-    "react-dom": "^18",
+    "next": "15.2.4",
+    "react": "^19",
+    "react-dom": "^19",
     "gray-matter": "^4.0.3",
-    "date-fns": "^3.6.0"
+    "date-fns": "^4.1.0"
   }
 }
