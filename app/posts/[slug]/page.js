@@ -1,0 +1,55 @@
+import Link from 'next/link'
+import { getAllPostSlugs, getPostData } from '../../../lib/posts'
+
+export function generateStaticParams() {
+  return getAllPostSlugs()
+}
+
+export async function generateMetadata({ params }) {
+  const post = getPostData(params.slug)
+  return {
+    title: post.title,
+    description: post.description,
+  }
+}
+
+export default function PostPage({ params }) {
+  const post = getPostData(params.slug)
+
+  return (
+    <article className="post-page">
+      <Link href="/" className="back-link">← 返回首页</Link>
+
+      <header className="post-header">
+        <span className="post-tag">{post.category || '文章'}</span>
+        <h1>{post.title}</h1>
+        <div className="post-meta">
+          <span>{post.dateStr}</span>
+          <span>·</span>
+          <span>{post.readTime || '5 min read'}</span>
+        </div>
+      </header>
+
+      {post.coverText && (
+        <div className="post-cover">
+          <span>{post.coverText}</span>
+        </div>
+      )}
+
+      <div
+        className="post-body"
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      />
+
+      <div className="tag-list">
+        {(post.tags || []).map(tag => (
+          <span key={tag} className="tag-item">{tag}</span>
+        ))}
+      </div>
+
+      <div style={{ marginTop: 48, paddingTop: 24, borderTop: '1px solid var(--border)', textAlign: 'center' }}>
+        <Link href="/" className="back-link">← 返回首页</Link>
+      </div>
+    </article>
+  )
+}
