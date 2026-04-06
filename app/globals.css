@@ -714,6 +714,30 @@ a:hover { color: var(--accent-soft); }
   letter-spacing: 1px;
 }
 
+.footer-links {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.footer-links a {
+  color: var(--ink-light);
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+.footer-links span {
+  color: var(--ink-light);
+}
+
 /* ===== CATEGORY PILL ===== */
 .category-pill {
   display: inline-block;

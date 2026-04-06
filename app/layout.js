@@ -35,6 +35,11 @@ export default function RootLayout({ children }) {
         <footer className="site-footer">
           <div className="footer-logo">咖啡<span>蛤蜊</span></div>
           <div className="footer-tagline">CAFE & CLAM · 记录真实</div>
+          <div className="footer-links">
+            <a href="mailto:249618569@qq.com">邮箱</a>
+            <span>·</span>
+            <a href="https://instagram.com/Dayige120" target="_blank">Instagram</a>
+          </div>
           <div className="footer-copy">© {new Date().getFullYear()} CafeClam · All rights reserved</div>
         </footer>
       </body>
