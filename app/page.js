@@ -29,7 +29,7 @@ export default function Home() {
           <a href="/" className="category-pill">生活</a>
           <a href="/" className="category-pill">观点</a>
           <a href="/" className="category-pill">随笔</a>
-          <a href="/" className="category-pill">读书</a>
+          <a href="/" className="category-pill">生活软装</a>
           <a href="/" className="category-pill">作品</a>
         </div>
 
