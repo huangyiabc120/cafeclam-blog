@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { getAllPostSlugs, getPostData } from '../../../lib/posts'
 
-export function generateStaticParams() {
-  return getAllPostSlugs()
+export async function generateStaticParams() {
+  const slugs = getAllPostSlugs()
+  return slugs
 }
 
 export async function generateMetadata({ params }) {
