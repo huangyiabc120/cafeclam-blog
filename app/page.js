@@ -26,7 +26,7 @@ export default function Home() {
         {/* Categories */}
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
           <a href="/" className="category-pill active">全部</a>
-          <a href="/" className="category-pill">生活</a>
+          <a href="/" className="category-pill">教程</a>
           <a href="/" className="category-pill">观点</a>
           <a href="/" className="category-pill">随笔</a>
           <a href="/" className="category-pill">生活软装</a>
