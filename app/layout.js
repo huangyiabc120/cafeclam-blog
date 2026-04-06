@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
           <div className="footer-links">
             <a href="mailto:249618569@qq.com">邮箱</a>
             <span>·</span>
-            <a href="https://instagram.com/Dayige120" target="_blank">Instagram</a>
+            <a href="https://instagram.com/hyabc110" target="_blank">Instagram</a>
           </div>
           <div className="footer-copy">© {new Date().getFullYear()} CafeClam · All rights reserved</div>
         </footer>

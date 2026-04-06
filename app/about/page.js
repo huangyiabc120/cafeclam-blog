@@ -50,7 +50,7 @@ export default function AboutPage() {
           如果你想交流、合作或者只是打个招呼：<br />
           邮箱：<a href="mailto:249618569@qq.com">249618569@qq.com</a><br />
           微信：blaxk120<br />
-          Instagram：<a href="https://instagram.com/Dayige120" target="_blank">@Dayige120</a>
+          Instagram：<a href="https://instagram.com/hyabc110" target="_blank">@hyabc110</a>
         </p>
         <blockquote>
           感谢你愿意在这里停留。期望这些文字对你有一点价值。
