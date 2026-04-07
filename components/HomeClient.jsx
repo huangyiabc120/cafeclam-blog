@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import PostCard from './PostCard'
 
 function useCategoryFilter(posts) {
   const categories = useMemo(() => {
@@ -68,7 +69,7 @@ export default function HomeClient({ posts }) {
 
       {/* Featured Post */}
       {featured && !isSearching && (
-        <article className="featured-post">
+        <article className="featured-post featured-post--large">
           <Link href={`/posts/${featured.slug}`} className="featured-image-link">
             <img
               src={`https://picsum.photos/seed/${featured.slug}/800/600`}
@@ -76,6 +77,7 @@ export default function HomeClient({ posts }) {
               className="featured-img"
               loading="eager"
             />
+            <div className="featured-img-overlay" />
           </Link>
           <div className="featured-content">
             <span className="featured-tag">{featured.category || '文章'}</span>
@@ -98,33 +100,17 @@ export default function HomeClient({ posts }) {
       {/* Section Header */}
       <div className="section-header">
         <span className="section-title">
-          {isSearching ? `搜索结果: "${query}"` : '最近发布'}
+          {isSearching ? `🔍 搜索结果: "${query}"` : '最近发布'}
         </span>
         <div className="section-line" />
+        {!isSearching && <span className="section-count">{rest.length} 篇</span>}
       </div>
 
       {/* Posts Grid */}
       {displayPosts.length > 0 ? (
         <div className="posts-grid">
-          {displayPosts.slice(0, isSearching ? 12 : 6).map(post => (
-            <article key={post.slug} className="post-card">
-              <Link href={`/posts/${post.slug}`} className="post-card-image-link">
-                <img
-                  src={`https://picsum.photos/seed/${post.slug}/400/250`}
-                  alt={post.title}
-                  className="post-card-img"
-                  loading="lazy"
-                />
-              </Link>
-              <div className="post-card-body">
-                <span className="post-card-tag">{post.category || '文章'}</span>
-                <h3 className="post-card-title">
-                  <Link href={`/posts/${post.slug}`}>{post.title}</Link>
-                </h3>
-                <p className="post-card-excerpt">{post.description}</p>
-                <div className="post-card-meta">{post.dateStr}</div>
-              </div>
-            </article>
+          {(isSearching ? displayPosts : rest.slice(0, 6)).map((post, i) => (
+            <PostCard key={post.slug} post={post} index={i} />
           ))}
         </div>
       ) : (
@@ -140,16 +126,20 @@ export default function HomeClient({ posts }) {
       {/* About Card */}
       {!isSearching && (
         <div className="about-card">
-          <h2>关于咖啡蛤蜊</h2>
-          <p>
-            这里是我的文字角落。写我所想，记我所见。
-            没有固定的更新频率，但每一篇都是认真的。
-            感谢你愿意在这里停留。
-          </p>
-          <br />
-          <Link href="/about" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--accent)' }}>
-            了解更多 →
-          </Link>
+          <div className="about-card-inner">
+            <div className="about-card-avatar">🧑‍💻</div>
+            <div className="about-card-text">
+              <h2>关于咖啡蛤蜊</h2>
+              <p>
+                这里是我的文字角落。写我所想，记我所见。
+                没有固定的更新频率，但每一篇都是认真的。
+                感谢你愿意在这里停留。
+              </p>
+              <Link href="/about" className="about-card-link">
+                了解更多 →
+              </Link>
+            </div>
+          </div>
         </div>
       )}
     </>
