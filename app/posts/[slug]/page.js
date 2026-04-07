@@ -4,11 +4,16 @@ import { extractHeadings } from '../../../lib/toc'
 import ReactMarkdown from 'react-markdown'
 import remarkSlug from 'remark-slug'
 import rehypeSlug from 'rehype-slug'
+import remarkGfm from 'remark-gfm'
 import TableOfContents from '../../../components/Toc'
 import Comments from '../../../components/Comments'
 import ViewCounter from '../../../components/ViewCounter'
 import PostNavigation from '../../../components/PostNavigation'
 import ShareButtons from '../../../components/ShareButtons'
+import ReadingProgress from '../../../components/ReadingProgress'
+import BackToTop from '../../../components/BackToTop'
+import CodeCopyButton from '../../../components/CodeCopyButton'
+import ImageLightbox from '../../../components/ImageLightbox'
 
 const SITE_URL = 'https://hyi-cafeclam.top'
 
@@ -39,7 +44,6 @@ export default async function PostPage({ params }) {
   const headings = extractHeadings(post.content)
   const allPosts = getSortedPostsData()
 
-  // Find prev / next
   const index = allPosts.findIndex(p => p.slug === slug)
   const prev = index < allPosts.length - 1 ? allPosts[index + 1] : null
   const next = index > 0 ? allPosts[index - 1] : null
@@ -48,13 +52,24 @@ export default async function PostPage({ params }) {
 
   return (
     <>
+      <ReadingProgress />
+      <BackToTop />
+      <ImageLightbox />
+      <CodeCopyButton />
+
       {headings.length > 0 && <TableOfContents headings={headings} />}
 
       <article className="post-page">
         <Link href="/" className="back-link">← 返回首页</Link>
 
         <header className="post-header">
-          <span className="post-tag">{post.category || '文章'}</span>
+          <nav className="breadcrumb" aria-label="面包屑">
+            <a href="/">首页</a>
+            <span> / </span>
+            <span>{post.category || '文章'}</span>
+            <span> / </span>
+            <span>{post.title}</span>
+          </nav>
           <h1>{post.title}</h1>
           <div className="post-meta">
             <span>{post.dateStr}</span>
@@ -70,7 +85,10 @@ export default async function PostPage({ params }) {
         )}
 
         <div className="post-body">
-          <ReactMarkdown remarkPlugins={[remarkSlug]} rehypePlugins={[rehypeSlug]}>
+          <ReactMarkdown
+            remarkPlugins={[remarkSlug, remarkGfm]}
+            rehypePlugins={[rehypeSlug]}
+          >
             {post.content}
           </ReactMarkdown>
         </div>
@@ -83,10 +101,8 @@ export default async function PostPage({ params }) {
           </div>
         )}
 
-        {/* Share */}
         <ShareButtons title={post.title} url={postUrl} />
 
-        {/* Author */}
         <div className="author-card">
           <div className="author-avatar">🧑‍💻</div>
           <div>
@@ -94,9 +110,6 @@ export default async function PostPage({ params }) {
             <div className="author-bio">记录生活、观点与碎碎念。咖啡与蛤蜊，一个温暖一个坚硬。</div>
           </div>
         </div>
-
-        {/* Subscribe */}
-        <SubscriptionForm />
 
         <PostNavigation prev={prev} next={next} />
 
@@ -107,27 +120,5 @@ export default async function PostPage({ params }) {
         </div>
       </article>
     </>
-  )
-}
-
-// Inline SubscriptionForm — simple version without external dependency
-function SubscriptionForm() {
-  return (
-    <div className="subscribe-wrap">
-      <div className="subscribe-inner">
-        <div className="subscribe-icon">📬</div>
-        <h3 className="subscribe-title">订阅更新</h3>
-        <p className="subscribe-desc">新文章发布时通知你，不错过任何一篇。</p>
-        <a
-          href="https://buttondown.email"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="subscribe-btn"
-          style={{ display: 'inline-block', textDecoration: 'none' }}
-        >
-          前往订阅 →
-        </a>
-      </div>
-    </div>
   )
 }
