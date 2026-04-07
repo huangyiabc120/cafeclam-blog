@@ -1,8 +1,8 @@
 ---
-title: "我的一天从这杯咖啡开始"
+title: "我不爱喝咖啡"
 category: "生活"
 date: "2026-04-05"
-description: "每天早上固定的咖啡仪式，简单但不可省略。"
+description: "每天早上固定的咖啡仪式，简单但可以忽略。"
 tags: ["生活", "咖啡"]
 readTime: "3 min read"
 coverText: "COFFEE"
