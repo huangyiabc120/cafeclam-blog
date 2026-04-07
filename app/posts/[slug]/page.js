@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getAllPostSlugs, getPostData } from '../../../lib/posts'
+import { getAllPostSlugs, getSortedPostsData, getPostData } from '../../../lib/posts'
 import { extractHeadings } from '../../../lib/toc'
 import ReactMarkdown from 'react-markdown'
 import remarkSlug from 'remark-slug'
@@ -7,13 +7,13 @@ import rehypeSlug from 'rehype-slug'
 import TableOfContents from '../../../components/Toc'
 import Comments from '../../../components/Comments'
 import ViewCounter from '../../../components/ViewCounter'
-import SubscriptionForm from '../../../components/SubscriptionForm'
+import PostNavigation from '../../../components/PostNavigation'
+import ShareButtons from '../../../components/ShareButtons'
 
 const SITE_URL = 'https://hyi-cafeclam.top'
 
 export async function generateStaticParams() {
-  const slugs = getAllPostSlugs()
-  return slugs
+  return getAllPostSlugs()
 }
 
 export async function generateMetadata({ params }) {
@@ -29,11 +29,7 @@ export async function generateMetadata({ params }) {
       publishedTime: post.date,
       tags: post.tags,
     },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.description,
-    },
+    twitter: { card: 'summary_large_image', title: post.title, description: post.description },
   }
 }
 
@@ -41,10 +37,17 @@ export default async function PostPage({ params }) {
   const { slug } = await params
   const post = getPostData(slug)
   const headings = extractHeadings(post.content)
+  const allPosts = getSortedPostsData()
+
+  // Find prev / next
+  const index = allPosts.findIndex(p => p.slug === slug)
+  const prev = index < allPosts.length - 1 ? allPosts[index + 1] : null
+  const next = index > 0 ? allPosts[index - 1] : null
+
+  const postUrl = `${SITE_URL}/posts/${slug}`
 
   return (
     <>
-      {/* TOC floats on the right, passed via portal-like approach */}
       {headings.length > 0 && <TableOfContents headings={headings} />}
 
       <article className="post-page">
@@ -63,16 +66,11 @@ export default async function PostPage({ params }) {
         </header>
 
         {post.coverText && (
-          <div className="post-cover">
-            <span>{post.coverText}</span>
-          </div>
+          <div className="post-cover"><span>{post.coverText}</span></div>
         )}
 
         <div className="post-body">
-          <ReactMarkdown
-            remarkPlugins={[remarkSlug]}
-            rehypePlugins={[rehypeSlug]}
-          >
+          <ReactMarkdown remarkPlugins={[remarkSlug]} rehypePlugins={[rehypeSlug]}>
             {post.content}
           </ReactMarkdown>
         </div>
@@ -80,21 +78,27 @@ export default async function PostPage({ params }) {
         {post.tags?.length > 0 && (
           <div className="tag-list">
             {post.tags.map(tag => (
-              <span key={tag} className="tag-item">{tag}</span>
+              <Link key={tag} href={`/?tag=${encodeURIComponent(tag)}`} className="tag-item">{tag}</Link>
             ))}
           </div>
         )}
 
-        {/* Author bio */}
+        {/* Share */}
+        <ShareButtons title={post.title} url={postUrl} />
+
+        {/* Author */}
         <div className="author-card">
           <div className="author-avatar">🧑‍💻</div>
-          <div className="author-info">
+          <div>
             <div className="author-name">毅哥哥</div>
             <div className="author-bio">记录生活、观点与碎碎念。咖啡与蛤蜊，一个温暖一个坚硬。</div>
           </div>
         </div>
 
+        {/* Subscribe */}
         <SubscriptionForm />
+
+        <PostNavigation prev={prev} next={next} />
 
         <Comments slug={slug} />
 
@@ -103,5 +107,27 @@ export default async function PostPage({ params }) {
         </div>
       </article>
     </>
+  )
+}
+
+// Inline SubscriptionForm — simple version without external dependency
+function SubscriptionForm() {
+  return (
+    <div className="subscribe-wrap">
+      <div className="subscribe-inner">
+        <div className="subscribe-icon">📬</div>
+        <h3 className="subscribe-title">订阅更新</h3>
+        <p className="subscribe-desc">新文章发布时通知你，不错过任何一篇。</p>
+        <a
+          href="https://buttondown.email"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="subscribe-btn"
+          style={{ display: 'inline-block', textDecoration: 'none' }}
+        >
+          前往订阅 →
+        </a>
+      </div>
+    </div>
   )
 }
