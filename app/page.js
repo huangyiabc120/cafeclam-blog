@@ -12,7 +12,7 @@ export default function Home() {
       <header className="site-header">
         <span className="header-eyebrow">CAFE CLAM · EST. 2026</span>
         <h1 className="header-title">
-          记录生活<br /><em>真实的碎碎念</em>
+          记录生活-让我静心<br /><em>暴躁的大毅哥</em>
         </h1>
         <p className="header-sub">
           咖啡是日常，蛤蜊是大海。一个温暖，一个坚硬，
@@ -27,10 +27,10 @@ export default function Home() {
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
           <a href="/" className="category-pill active">全部</a>
           <a href="/" className="category-pill">教程</a>
-          <a href="/" className="category-pill">观点</a>
+          <a href="/" className="category-pill">免费资源</a>
           <a href="/" className="category-pill">随笔</a>
           <a href="/" className="category-pill">生活软装</a>
-          <a href="/" className="category-pill">作品</a>
+          <a href="/" className="category-pill">AI作品</a>
         </div>
 
         {/* Featured Post */}
