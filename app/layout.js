@@ -1,4 +1,5 @@
 import './globals.css'
+import { useEffect, useState } from 'react'
 
 export const metadata = {
   title: {
@@ -13,22 +14,48 @@ const navLinks = [
   { href: '/about', label: '关于' },
 ]
 
+function ThemeToggle() {
+  const [theme, setTheme] = useState('light')
+
+  useEffect(() => {
+    const saved = localStorage.getItem('theme') || 'light'
+    setTheme(saved)
+    document.documentElement.setAttribute('data-theme', saved)
+  }, [])
+
+  const toggle = () => {
+    const next = theme === 'light' ? 'dark' : 'light'
+    setTheme(next)
+    localStorage.setItem('theme', next)
+    document.documentElement.setAttribute('data-theme', next)
+  }
+
+  return (
+    <button className="theme-toggle" onClick={toggle} aria-label="切换主题" title={theme === 'light' ? '深色模式' : '浅色模式'}>
+      {theme === 'light' ? '🌙' : '☀️'}
+    </button>
+  )
+}
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="zh-CN">
+    <html lang="zh-CN" suppressHydrationWarning>
       <body>
         <nav className="site-nav">
           <div className="nav-inner">
             <a href="/" className="nav-logo">
               咖啡<span>蛤蜊</span>
             </a>
-            <ul className="nav-links">
-              {navLinks.map(link => (
-                <li key={link.href}>
-                  <a href={link.href}>{link.label}</a>
-                </li>
-              ))}
-            </ul>
+            <div className="nav-right">
+              <ul className="nav-links">
+                {navLinks.map(link => (
+                  <li key={link.href}>
+                    <a href={link.href}>{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+              <ThemeToggle />
+            </div>
           </div>
         </nav>
         {children}
@@ -36,9 +63,11 @@ export default function RootLayout({ children }) {
           <div className="footer-logo">咖啡<span>蛤蜊</span></div>
           <div className="footer-tagline">CAFE & CLAM · 记录真实</div>
           <div className="footer-links">
+            <a href="/feed.xml" title="RSS 订阅">RSS</a>
+            <span>·</span>
             <a href="mailto:249618569@qq.com">邮箱</a>
             <span>·</span>
-            <a href="https://instagram.com/hyabc110" target="_blank">Instagram</a>
+            <a href="https://instagram.com/hyabc110" target="_blank" rel="noopener">Instagram</a>
           </div>
           <div className="footer-copy">© {new Date().getFullYear()} CafeClam · All rights reserved</div>
         </footer>
