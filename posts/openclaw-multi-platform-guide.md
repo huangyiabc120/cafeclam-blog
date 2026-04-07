@@ -97,7 +97,7 @@ openclaw config set channels.feishu.botName "我的AI助手"
 
 步骤 7：重启并测试
 Copy
-openclaw gateway restart
+OpenCLAW gateway restart
 在飞书中搜索你的 Bot 名字，发消息测试。
 
 第三站：QQ 机器人（15 分钟）
@@ -121,7 +121,7 @@ openclaw skill install openclaw-qq-plugin
 
 步骤 4：重启并测试
 Copy
-openclaw gateway restart
+OpenCLAW gateway restart
 给 Bot QQ 号发消息测试。
 
 进阶：让 AI 帮你配置
