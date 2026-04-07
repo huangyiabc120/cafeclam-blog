@@ -796,3 +796,67 @@ a:hover { color: var(--accent-soft); }
   margin-bottom: 16px;
 }
 .not-found p { color: var(--ink-light); margin-bottom: 24px; }
+/* 霓虹咖啡馆风格 - 精选文章图片 */
+.featured-image {
+  position: relative;
+  background: linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 50%, #0f1a2a 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featured-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(255, 0, 128, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(0, 255, 255, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(255, 200, 0, 0.2) 0%, transparent 40%);
+  animation: neonPulse 4s ease-in-out infinite;
+}
+
+.featured-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(0, 255, 255, 0.1) 50%, transparent 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px);
+  animation: scanline 8s linear infinite;
+}
+
+.featured-image span {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 6px;
+  color: #ff0080;
+  text-shadow: 
+    0 0 10px #ff0080,
+    0 0 20px #ff0080,
+    0 0 40px #ff0080,
+    0 0 80px #ff0080;
+  animation: textFlicker 3s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(4px); }
+}
+
+@keyframes textFlicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  96% { opacity: 0.9; }
+  97% { opacity: 1; }
+}
