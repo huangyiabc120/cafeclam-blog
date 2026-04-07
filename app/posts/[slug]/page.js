@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { getAllPostSlugs, getPostData } from '../../../lib/posts'
 import ReactMarkdown from 'react-markdown'
-import { getAllPostSlugs, getPostData } from '../../../lib/posts'
 
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs()
@@ -42,8 +41,8 @@ export default async function PostPage({ params }) {
       )}
 
       <div className="post-body">
-  <ReactMarkdown>{post.content}</ReactMarkdown>
-</div>
+        <ReactMarkdown>{post.content}</ReactMarkdown>
+      </div>
 
       <div className="tag-list">
         {(post.tags || []).map(tag => (
