@@ -96,7 +96,7 @@ export default async function PostPage({ params }) {
 
         <SubscriptionForm />
 
-        <Comments />
+        <Comments slug={slug} />
 
         <div style={{ marginTop: 48, paddingTop: 24, borderTop: '1px solid var(--border)', textAlign: 'center' }}>
           <Link href="/" className="back-link">← 返回首页</Link>
