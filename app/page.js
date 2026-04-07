@@ -37,7 +37,7 @@ export default function Home() {
         {featured && (
           <article className="featured-post">
             <div className="featured-image">
-              <span>{featured.coverText || 'COVER IMAGE'}</span>
+              <span>NEON CAFE</span>
             </div>
             <div className="featured-content">
               <span className="featured-tag">{featured.category || '文章'}</span>
