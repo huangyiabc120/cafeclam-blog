@@ -96,6 +96,8 @@ export default function RootLayout({ children }) {
           </div>
           <div className="footer-copy">© {new Date().getFullYear()} CafeClam · All rights reserved</div>
         </footer>
+      {/* Plausible Analytics - privacy-friendly, cookie-free */}
+      <script defer src="https://plausible.io/js/script.js" data-domain="hyi-cafeclam.top" />
       </body>
     </html>
   )
