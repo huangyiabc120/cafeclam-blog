@@ -16,6 +16,11 @@ export default function Home() {
 
   return (
     <>
+      {/* 顶部横幅 */}
+      <div className="home-banner">
+        <img src="/images/header.jpg" alt="博客横幅" className="home-banner-img" />
+      </div>
+
       <header className="site-header hero-animate">
         <span className="header-eyebrow">☕ CAFE CLAM · EST. 2026</span>
         <h1 className="header-title">
