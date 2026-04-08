@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import PostCard from './PostCard'
 
-const POSTS_PER_PAGE = 6
+const POSTS_PER_PAGE = 4
 
 function useCategoryFilter(posts) {
   const categories = useMemo(() => {
@@ -122,10 +122,10 @@ export default function HomeClient({ posts }) {
       {/* Section Header */}
       <div className="section-header">
         <span className="section-title">
-          {isSearching ? `🔍 搜索结果: "${query}"` : '最近发布'}
+          {isSearching ? `🔍 搜索结果: "${query}"` : (safePage > 1 ? `第 ${safePage} 页` : '最近发布')}
         </span>
         <div className="section-line" />
-        {!isSearching && <span className="section-count">{rest.length} 篇</span>}
+        <span className="section-count">{searchResults.length} 篇</span>
       </div>
 
       {/* Posts Grid */}
