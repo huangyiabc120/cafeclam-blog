@@ -89,8 +89,8 @@ export default function HomeClient({ posts }) {
         </div>
       )}
 
-      {/* Featured Post */}
-      {featured && !isSearching && (
+      {/* Featured Post - only on page 1 and not searching */}
+      {featured && !isSearching && safePage === 1 && (
         <article className="featured-post featured-post--large">
           <Link href={`/posts/${featured.slug}`} className="featured-image-link">
             <img
