@@ -14,6 +14,7 @@ import ReadingProgress from '../../../components/ReadingProgress'
 import BackToTop from '../../../components/BackToTop'
 import CodeCopyButton from '../../../components/CodeCopyButton'
 import ImageLightbox from '../../../components/ImageLightbox'
+import AuthorAvatar from '../../../components/AuthorAvatar'
 
 const SITE_URL = 'https://hyi-cafeclam.top'
 
@@ -104,15 +105,7 @@ export default async function PostPage({ params }) {
         <ShareButtons title={post.title} url={postUrl} />
 
         <div className="author-card">
-          <div className="author-avatar">
-            <img
-              src="/avatar.jpg"
-              alt="毅哥哥"
-              className="author-avatar-img"
-              onError={e => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }}
-            />
-            <div className="author-avatar-fallback">🧑‍💻</div>
-          </div>
+          <AuthorAvatar src="/avatar.jpg" alt="毅哥哥" />
           <div>
             <div className="author-name">毅哥哥</div>
             <div className="author-bio">记录生活、观点与碎碎念。咖啡与蛤蜊，一个温暖一个坚硬。</div>
