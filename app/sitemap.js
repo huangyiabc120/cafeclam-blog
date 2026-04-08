@@ -1,4 +1,4 @@
-import { getSortedPostsData } from './lib/posts'
+import { getSortedPostsData } from '../lib/posts'
 
 const SITE_URL = 'https://hyi-cafeclam.top'
 
