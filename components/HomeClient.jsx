@@ -4,6 +4,8 @@ import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import PostCard from './PostCard'
 
+const POSTS_PER_PAGE = 6
+
 function useCategoryFilter(posts) {
   const categories = useMemo(() => {
     const cats = [...new Set(posts.map(p => p.category).filter(Boolean))]
@@ -21,11 +23,12 @@ function useCategoryFilter(posts) {
 export default function HomeClient({ posts }) {
   const { categories, active: activeCategory, setActive: setCategory, filtered } = useCategoryFilter(posts)
   const [query, setQuery] = useState('')
+  const [page, setPage] = useState(1)
 
   const featured = filtered[0]
   const rest = filtered.slice(1)
 
-  const displayPosts = query.trim()
+  const searchResults = query.trim()
     ? filtered.filter(p =>
         p.title?.toLowerCase().includes(query.toLowerCase()) ||
         p.description?.toLowerCase().includes(query.toLowerCase()) ||
@@ -33,7 +36,26 @@ export default function HomeClient({ posts }) {
       )
     : rest
 
+  const totalPages = Math.ceil(searchResults.length / POSTS_PER_PAGE)
+  const safePage = Math.min(Math.max(1, page), totalPages || 1)
+  const displayPosts = searchResults.slice((safePage - 1) * POSTS_PER_PAGE, safePage * POSTS_PER_PAGE)
+
   const isSearching = query.trim().length > 0
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleCategoryChange = (cat) => {
+    setCategory(cat)
+    setPage(1)
+  }
+
+  const handleSearch = (q) => {
+    setQuery(q)
+    setPage(1)
+  }
 
   return (
     <>
@@ -45,10 +67,10 @@ export default function HomeClient({ posts }) {
           className="search-input"
           placeholder="搜索文章标题、描述或标签..."
           value={query}
-          onChange={e => setQuery(e.target.value)}
+          onChange={e => handleSearch(e.target.value)}
         />
         {query && (
-          <button className="search-clear" onClick={() => setQuery('')}>✕</button>
+          <button className="search-clear" onClick={() => handleSearch('')}>✕</button>
         )}
       </div>
 
@@ -59,7 +81,7 @@ export default function HomeClient({ posts }) {
             <button
               key={cat}
               className={`category-pill ${activeCategory === cat ? 'active' : ''}`}
-              onClick={() => setCategory(cat)}
+              onClick={() => handleCategoryChange(cat)}
             >
               {cat}
             </button>
@@ -108,16 +130,49 @@ export default function HomeClient({ posts }) {
 
       {/* Posts Grid */}
       {displayPosts.length > 0 ? (
-        <div className="posts-grid">
-          {(isSearching ? displayPosts : rest.slice(0, 6)).map((post, i) => (
-            <PostCard key={post.slug} post={post} index={i} />
-          ))}
-        </div>
+        <>
+          <div className="posts-grid">
+            {displayPosts.map((post, i) => (
+              <PostCard key={post.slug} post={post} index={i} />
+            ))}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="pagination">
+              <button
+                className="pagination-btn"
+                onClick={() => handlePageChange(safePage - 1)}
+                disabled={safePage <= 1}
+              >
+                ← 上一页
+              </button>
+              <div className="pagination-pages">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
+                  <button
+                    key={p}
+                    className={`pagination-page ${p === safePage ? 'active' : ''}`}
+                    onClick={() => handlePageChange(p)}
+                  >
+                    {p}
+                  </button>
+                ))}
+              </div>
+              <button
+                className="pagination-btn"
+                onClick={() => handlePageChange(safePage + 1)}
+                disabled={safePage >= totalPages}
+              >
+                下一页 →
+              </button>
+            </div>
+          )}
+        </>
       ) : (
         <div className="empty-state">
           <span className="empty-icon">🔍</span>
           <p>没有找到相关文章</p>
-          <button onClick={() => { setQuery(''); setCategory('全部'); }} className="empty-reset">
+          <button onClick={() => { handleSearch(''); handleCategoryChange('全部'); }} className="empty-reset">
             清除筛选
           </button>
         </div>
