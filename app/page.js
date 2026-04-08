@@ -1,12 +1,22 @@
 import { getSortedPostsData } from '../lib/posts'
 import HomeClient from '../components/HomeClient'
+import Sidebar from '../components/Sidebar'
 
 export default function Home() {
   const allPosts = getSortedPostsData()
 
+  // 收集所有标签
+  const tagSet = new Set()
+  allPosts.forEach(post => {
+    if (Array.isArray(post.tags)) {
+      post.tags.forEach(tag => tagSet.add(tag))
+    }
+  })
+  const allTags = Array.from(tagSet)
+
   return (
     <>
-      <header className="site-header">
+      <header className="site-header hero-animate">
         <span className="header-eyebrow">☕ CAFE CLAM · EST. 2026</span>
         <h1 className="header-title">
           记录生活<br /><em>让思考留下痕迹</em>
@@ -18,8 +28,11 @@ export default function Home() {
         <div className="header-divider" />
       </header>
 
-      <main className="site-main">
-        <HomeClient posts={allPosts} />
+      <main className="site-main home-layout">
+        <div className="home-content">
+          <HomeClient posts={allPosts} />
+        </div>
+        <Sidebar posts={allPosts} allTags={allTags} />
       </main>
     </>
   )

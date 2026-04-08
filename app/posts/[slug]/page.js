@@ -123,6 +123,14 @@ export default async function PostPage({ params }) {
 
         <Comments slug={slug} />
 
+        <div className="post-copyright">
+          <div className="post-copyright-icon">📚</div>
+          <div className="post-copyright-text">
+            <strong>转载声明</strong>
+            <p>本文未经作者授权，禁止任何形式的转载。如需转载，请联系作者获得许可。© CafeClam · 毅哥哥</p>
+          </div>
+        </div>
+
         <div style={{ marginTop: 48, paddingTop: 24, borderTop: '1px solid var(--border)', textAlign: 'center' }}>
           <Link href="/" className="back-link">← 返回首页</Link>
         </div>

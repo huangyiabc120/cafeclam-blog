@@ -5,6 +5,10 @@ export const metadata = {
   description: '关于咖啡蛤蜊博客',
 }
 
+const interests = ['AI助手', '效率工具', '互联网折腾', '写作', '咖啡', '阅读']
+const readingNow = ['《有限与无限的游戏》', '《工作、消费主义和新穷人》']
+const coffeeShop = '星巴克 / 瑞幸 / 家里'
+
 export default function AboutPage() {
   return (
     <article className="post-page">
@@ -20,7 +24,7 @@ export default function AboutPage() {
         </div>
       </header>
 
-      <div className="post-cover">
+      <div className="post-cover about-cover">
         <span>CAFE CLAM · COVER</span>
       </div>
 
@@ -39,16 +43,41 @@ export default function AboutPage() {
           想写的时候就写，想停的时候就停。
           但每一篇文字，都是认真的。
         </p>
+
+        <h2>关于我</h2>
+        <p>
+          一个喜欢折腾工具和效率的互联网玩家。<br />
+          相信 AI 是这个时代最重要的变量，也相信好的文字依然有力量。
+        </p>
+
+        <div className="about-tags">
+          {interests.map(tag => (
+            <span key={tag} className="about-tag">{tag}</span>
+          ))}
+        </div>
+
+        <h2>最近在读</h2>
+        <ul>
+          {readingNow.map(book => (
+            <li key={book}>{book}</li>
+          ))}
+        </ul>
+
+        <h2>常驻咖啡馆</h2>
+        <p>{coffeeShop}</p>
+
         <h2>这个博客</h2>
         <p>
           用 Next.js 构建，托管在 Vercel。
-          没有评论系统，没有数据分析，没有乱七八糟的追踪脚本。
+          没有评论系统，没有乱七八糟的追踪脚本。
           只写我想写的，你看你的。
         </p>
+
         <h2>联系我</h2>
         <p>
           如果你想交流、合作或者只是打个招呼：<br />
           邮箱：<a href="mailto:249618569@qq.com">249618569@qq.com</a><br />
+          GitHub：<a href="https://github.com/huangyiabc120" target="_blank" rel="noopener">@huangyiabc120</a><br />
           Instagram：<a href="https://instagram.com/hyabc110" target="_blank" rel="noopener">@hyabc110</a>
         </p>
         <blockquote>
