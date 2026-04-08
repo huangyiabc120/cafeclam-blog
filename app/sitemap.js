@@ -7,7 +7,7 @@ export default function sitemap() {
 
   const postEntries = posts.map(post => ({
     url: `${SITE_URL}/posts/${post.slug}`,
-    lastModified: new Date(post.date),
+    lastModified: post.date ? new Date(post.date) : new Date(),
     changeFrequency: 'monthly',
     priority: post.featured ? 0.8 : 0.6,
   }))
