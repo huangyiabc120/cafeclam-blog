@@ -79,7 +79,7 @@ tags:
 
 ### 三视图示例图
 
-![角色三视图](https://hyi-cafeclam.top/images/ai-manju/character-threeview-sheet.png)
+![角色三视图](/images/ai-manju/character-threeview-sheet.png)
 
 > 图：角色三视图标准角度示范 — 正面/侧面/背面三视角锁定角色特征（AI生成）
 
@@ -142,7 +142,7 @@ tags:
 氛围：紧张+诗意
 ```
 
-![竹林场景](https://hyi-cafeclam.top/images/ai-manju/scene-bamboo-forest.png)
+![竹林场景](/images/ai-manju/scene-bamboo-forest.png)
 
 **山崖绝壁**
 ```
@@ -151,7 +151,7 @@ tags:
 氛围：史诗+命运感
 ```
 
-![山崖场景](https://hyi-cafeclam.top/images/ai-manju/scene-cliff-mountain.png)
+![山崖场景](/images/ai-manju/scene-cliff-mountain.png)
 
 **古寺内景**
 ```
@@ -160,7 +160,7 @@ tags:
 氛围：神秘+紧张
 ```
 
-![古寺场景](https://hyi-cafeclam.top/images/ai-manju/scene-ancient-temple.png)
+![古寺场景](/images/ai-manju/scene-ancient-temple.png)
 
 **都市夜景**
 ```
@@ -169,7 +169,7 @@ tags:
 氛围：赛博+未来感
 ```
 
-![都市夜景](https://hyi-cafeclam.top/images/ai-manju/scene-urban-night.png)
+![都市夜景](/images/ai-manju/scene-urban-night.png)
 
 **室内场景**
 ```
@@ -178,7 +178,7 @@ tags:
 氛围：温馨/私密
 ```
 
-![室内场景](https://hyi-cafeclam.top/images/ai-manju/scene-indoor-cozy.png)
+![室内场景](/images/ai-manju/scene-indoor-cozy.png)
 
 ---
 
@@ -351,7 +351,7 @@ tags:
 
 ### 分镜示意图
 
-![分镜脚本示例](https://hyi-cafeclam.top/images/ai-manju/storyboard-guide.png)
+![分镜脚本示例](/images/ai-manju/storyboard-guide.png)
 
 > 图：标准分镜脚本格式示例，含景别/运镜/灯光/构图/音效完整标注
 
