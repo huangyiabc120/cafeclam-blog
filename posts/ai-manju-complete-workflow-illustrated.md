@@ -79,9 +79,9 @@ tags:
 
 ### 三视图示例图
 
-![三视图示例](https://picsum.photos/seed/character-threeview/800/400)
+![角色三视图](https://hyi-cafeclam.top/images/ai-manju/character-threeview-sheet.png)
 
-> 图：角色三视图标准角度示范。来源：影视美术设计参考
+> 图：角色三视图标准角度示范 — 正面/侧面/背面三视角锁定角色特征（AI生成）
 
 ---
 
@@ -140,10 +140,9 @@ tags:
 地点：竹林外景
 时间：黄昏（夕阳穿透竹叶）
 氛围：紧张+诗意
-参考图：https://picsum.photos/seed/bamboo-forest/800/450
 ```
 
-![竹林场景参考](https://picsum.photos/seed/bamboo-forest/800/450)
+![竹林场景](https://hyi-cafeclam.top/images/ai-manju/scene-bamboo-forest.png)
 
 **山崖绝壁**
 ```
@@ -152,7 +151,7 @@ tags:
 氛围：史诗+命运感
 ```
 
-![山崖场景参考](https://picsum.photos/seed/cliff-mountain/800/450)
+![山崖场景](https://hyi-cafeclam.top/images/ai-manju/scene-cliff-mountain.png)
 
 **古寺内景**
 ```
@@ -161,7 +160,7 @@ tags:
 氛围：神秘+紧张
 ```
 
-![古寺场景参考](https://picsum.photos/seed/ancient-temple/800/450)
+![古寺场景](https://hyi-cafeclam.top/images/ai-manju/scene-ancient-temple.png)
 
 **都市夜景**
 ```
@@ -170,7 +169,7 @@ tags:
 氛围：赛博+未来感
 ```
 
-![都市夜景参考](https://picsum.photos/seed/cyberpunk-city/800/450)
+![都市夜景](https://hyi-cafeclam.top/images/ai-manju/scene-urban-night.png)
 
 **室内场景**
 ```
@@ -179,7 +178,7 @@ tags:
 氛围：温馨/私密
 ```
 
-![室内场景参考](https://picsum.photos/seed/indoor-cozy/800/450)
+![室内场景](https://hyi-cafeclam.top/images/ai-manju/scene-indoor-cozy.png)
 
 ---
 
