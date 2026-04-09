@@ -351,7 +351,7 @@ tags:
 
 ### 分镜示意图
 
-![分镜脚本示例](https://picsum.photos/seed/storyboard/800/500)
+![分镜脚本示例](https://hyi-cafeclam.top/images/ai-manju/storyboard-guide.png)
 
 > 图：标准分镜脚本格式示例，含景别/运镜/灯光/构图/音效完整标注
 
