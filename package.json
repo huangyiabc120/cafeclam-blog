@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "date-fns": "^4.1.0",
+    "emoji-picker-react": "^4.18.0",
     "gray-matter": "^4.0.3",
     "next": "^16.2.2",
     "react": "^18",
