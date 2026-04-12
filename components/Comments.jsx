@@ -14,9 +14,9 @@ export default function Comments({ slug }) {
     const script = document.createElement('script')
     script.src = 'https://giscus.app/client.js'
     script.setAttribute('data-repo', 'huangyiabc120/cafeclam-blog')
-    script.setAttribute('data-repo-id', 'YOUR_REPO_ID')        // TODO: 替换
-    script.setAttribute('data-category', '评论区')
-    script.setAttribute('data-category-id', 'YOUR_CATEGORY_ID') // TODO: 替换
+    script.setAttribute('data-repo-id', 'R_kgDOR7MlhQ')
+    script.setAttribute('data-category', 'General')
+    script.setAttribute('data-category-id', 'DIC_kwDOR7Mlhc4C6sLE')
     script.setAttribute('data-mapping', 'pathname')
     script.setAttribute('data-strict', '0')
     script.setAttribute('data-reactions-enabled', '1')
