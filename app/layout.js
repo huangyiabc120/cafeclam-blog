@@ -60,6 +60,7 @@ export default function RootLayout({ children }) {
                 <div className="footer-nav-title">导航</div>
                 <a href="/" className="footer-nav-link">首页</a>
                 <a href="/about" className="footer-nav-link">关于</a>
+                <a href="/works" className="footer-nav-link">学员作品</a>
                 <a href="/feed.xml" className="footer-nav-link">RSS 订阅</a>
               </div>
               <div className="footer-nav-col">
