@@ -5,6 +5,7 @@ student: 学员
 category: 视频作品
 description: 学员视频作品展示
 videoUrl: "/videos/1.mp4"
+coverImage: "/images/works/poster-1.jpg"
 ---
 
 学员视频作品展示。

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import styles from './page.module.css'
 
 export default function WorksGrid({ works }) {
@@ -35,81 +36,67 @@ export default function WorksGrid({ works }) {
   return (
     <div className={styles.grid}>
       {works.map((work, index) => (
-        <article
+        <Link
           key={work.slug}
+          href={`/works/${work.slug}`}
+          className={styles.cardLink}
           data-slug={work.slug}
-          className={styles.card}
           style={{
             opacity: visibleCards.has(work.slug) ? 1 : 0,
             transform: visibleCards.has(work.slug) ? 'translateY(0)' : 'translateY(32px)',
             transition: `opacity 0.65s ease ${index * 0.08}s, transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.08}s, box-shadow 0.35s, border-color 0.3s`,
           }}
         >
-          <div className={styles.video}>
-            {work.videoUrl ? (
-              <>
-                <VideoPlayer url={work.videoUrl} title={work.title} />
-                <div className={styles.videoOverlay}>
-                  <div className={styles.videoOverlayIcon}>▶</div>
+          <article className={styles.card}>
+            {/* ===== POSTER / COVER ===== */}
+            <div className={styles.poster}>
+              {/* CSS-generated cinematic poster */}
+              <div className={styles.posterBg} style={{ '--hue': index * 47 + 15 } as React.CSSProperties}>
+                <div className={styles.posterOverlay} />
+                <div className={styles.posterContent}>
+                  <span className={styles.posterEyebrow}>{work.category || '视频作品'}</span>
+                  <h2 className={styles.posterTitle}>{work.title}</h2>
+                  {work.student && (
+                    <span className={styles.posterStudent}>
+                      <span className={styles.posterStudentDot} />
+                      {work.student}
+                    </span>
+                  )}
                 </div>
-              </>
-            ) : (
-              <div className={styles.noVideo}>
-                <div className={styles.noVideoIcon}>🎬</div>
-                <span>暂无视频</span>
+                {/* Film frame corners */}
+                <div className={`${styles.frameCorner} ${styles.tl}`} />
+                <div className={`${styles.frameCorner} ${styles.tr}`} />
+                <div className={`${styles.frameCorner} ${styles.bl}`} />
+                <div className={`${styles.frameCorner} ${styles.br}`} />
               </div>
-            )}
-          </div>
 
-          <div className={styles.info}>
-            <div className={styles.infoTop}>
-              <span className={styles.tag}>{work.category || '视频作品'}</span>
+              {/* Play button */}
+              <div className={styles.playBtn}>
+                <div className={styles.playIcon}>▶</div>
+                <span className={styles.playText}>观看作品</span>
+              </div>
             </div>
-            <h2 className={styles.title}>{work.title}</h2>
-            {work.student && (
-              <p className={styles.student}>{work.student}</p>
-            )}
-            {work.description && (
-              <p className={styles.desc}>{work.description}</p>
-            )}
-            <div className={styles.meta}>
-              <span className={styles.metaDate}>{work.dateStr}</span>
-              <span className={styles.watchBtn}>▶ 观看作品</span>
+
+            {/* ===== CARD INFO ===== */}
+            <div className={styles.info}>
+              <div className={styles.infoTop}>
+                <span className={styles.tag}>{work.category || '视频作品'}</span>
+              </div>
+              <h2 className={styles.title}>{work.title}</h2>
+              {work.student && (
+                <p className={styles.student}>{work.student}</p>
+              )}
+              {work.description && (
+                <p className={styles.desc}>{work.description}</p>
+              )}
+              <div className={styles.meta}>
+                <span className={styles.metaDate}>{work.dateStr}</span>
+                <span className={styles.watchBtn}>▶ 播放</span>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+        </Link>
       ))}
     </div>
   )
-}
-
-function VideoPlayer({ url, title }) {
-  const isEmbed = url.includes('bilibili.com') || url.includes('youtube.com') || url.includes('youtu.be')
-  const isDirect = url.endsWith('.mp4') || url.endsWith('.webm') || url.endsWith('.mov')
-
-  if (isEmbed) {
-    let src = url
-    if (url.includes('bilibili.com')) {
-      const bv = url.split('/').pop().split('?')[0]
-      src = `https://player.bilibili.com/player.html?bvid=${bv}`
-    } else if (url.includes('youtube.com/watch')) {
-      const v = url.split('v=')[1]?.split('&')[0]
-      src = `https://www.youtube.com/embed/${v}`
-    } else if (url.includes('youtu.be/')) {
-      const v = url.split('youtu.be/')[1]?.split('?')[0]
-      src = `https://www.youtube.com/embed/${v}`
-    }
-    return <iframe src={src} scrolling="no" allowFullScreen title={title} />
-  }
-
-  if (isDirect) {
-    return (
-      <video controls>
-        <source src={url} />
-        您的浏览器不支持视频播放。
-      </video>
-    )
-  }
-
-  return null
 }
