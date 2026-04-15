@@ -5,7 +5,7 @@ student: 学员
 category: 视频作品
 description: 学员视频作品展示
 videoUrl: "/videos/3.mp4"
-coverImage: "/images/works/poster-3.jpg"
+coverImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80"
 ---
 
 学员视频作品展示。

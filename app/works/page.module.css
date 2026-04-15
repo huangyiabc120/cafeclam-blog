@@ -32,12 +32,27 @@
   border-color: var(--accent);
 }
 
-/* ===== CINEMATIC POSTER ===== */
+/* ===== POSTER / COVER ===== */
 .poster {
   position: relative;
   width: 100%;
-  padding-top: 133%;
+  padding-top: 56.25%;
   overflow: hidden;
+}
+
+.posterImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.cardLink:hover .posterImg {
+  transform: scale(1.06);
 }
 
 .posterBg {
@@ -305,9 +320,5 @@
   .grid {
     grid-template-columns: 1fr;
     gap: 20px;
-  }
-
-  .poster {
-    padding-top: 100%;
   }
 }

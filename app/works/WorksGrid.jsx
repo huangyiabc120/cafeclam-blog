@@ -50,25 +50,33 @@ export default function WorksGrid({ works }) {
           <article className={styles.card}>
             {/* ===== POSTER / COVER ===== */}
             <div className={styles.poster}>
-              {/* CSS-generated cinematic poster */}
-              <div className={styles.posterBg} style={{ '--hue': index * 47 + 15 } as React.CSSProperties}>
-                <div className={styles.posterOverlay} />
-                <div className={styles.posterContent}>
-                  <span className={styles.posterEyebrow}>{work.category || '视频作品'}</span>
-                  <h2 className={styles.posterTitle}>{work.title}</h2>
-                  {work.student && (
-                    <span className={styles.posterStudent}>
-                      <span className={styles.posterStudentDot} />
-                      {work.student}
-                    </span>
-                  )}
+              {work.coverImage ? (
+                /* Real cover image */
+                <img
+                  src={work.coverImage}
+                  alt={work.title}
+                  className={styles.posterImg}
+                />
+              ) : (
+                /* CSS-generated cinematic poster fallback */
+                <div className={styles.posterBg} style={{ '--hue': index * 47 + 15 } as React.CSSProperties}>
+                  <div className={styles.posterOverlay} />
+                  <div className={styles.posterContent}>
+                    <span className={styles.posterEyebrow}>{work.category || '视频作品'}</span>
+                    <h2 className={styles.posterTitle}>{work.title}</h2>
+                    {work.student && (
+                      <span className={styles.posterStudent}>
+                        <span className={styles.posterStudentDot} />
+                        {work.student}
+                      </span>
+                    )}
+                  </div>
+                  <div className={`${styles.frameCorner} ${styles.tl}`} />
+                  <div className={`${styles.frameCorner} ${styles.tr}`} />
+                  <div className={`${styles.frameCorner} ${styles.bl}`} />
+                  <div className={`${styles.frameCorner} ${styles.br}`} />
                 </div>
-                {/* Film frame corners */}
-                <div className={`${styles.frameCorner} ${styles.tl}`} />
-                <div className={`${styles.frameCorner} ${styles.tr}`} />
-                <div className={`${styles.frameCorner} ${styles.bl}`} />
-                <div className={`${styles.frameCorner} ${styles.br}`} />
-              </div>
+              )}
 
               {/* Play button */}
               <div className={styles.playBtn}>
