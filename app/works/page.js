@@ -25,6 +25,11 @@ function getEmbedUrl(url) {
   return null
 }
 
+function isDirectVideo(url) {
+  if (!url) return false
+  return url.endsWith('.mp4') || url.endsWith('.webm') || url.endsWith('.mov')
+}
+
 export default function WorksPage() {
   const works = getSortedWorksData()
 
@@ -58,6 +63,11 @@ export default function WorksPage() {
                           allowFullScreen
                           title={work.title}
                         />
+                      ) : isDirectVideo(work.videoUrl) ? (
+                        <video controls>
+                          <source src={work.videoUrl} />
+                          您的浏览器不支持视频播放。
+                        </video>
                       ) : (
                         <div className={styles.noVideo}>暂无视频</div>
                       )}
