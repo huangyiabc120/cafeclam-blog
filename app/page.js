@@ -5,27 +5,10 @@ import Sidebar from '../components/Sidebar'
 import Link from 'next/link'
 import styles from './home-works.module.css'
 
-function getEmbedUrl(url) {
-  if (!url) return null
-  if (url.includes('bilibili.com')) {
-    const bv = url.split('/').pop().split('?')[0]
-    return `https://player.bilibili.com/player.html?bvid=${bv}`
-  }
-  if (url.includes('youtube.com/watch')) {
-    const v = url.split('v=')[1]?.split('&')[0]
-    return `https://www.youtube.com/embed/${v}`
-  }
-  if (url.includes('youtu.be/')) {
-    const v = url.split('youtu.be/')[1]?.split('?')[0]
-    return `https://www.youtube.com/embed/${v}`
-  }
-  if (url.includes('youtube.com/embed/')) return url
-  return null
-}
-
 export default function Home() {
   const allPosts = getSortedPostsData()
-  const recentWorks = getSortedWorksData().slice(0, 3)
+  const works = getSortedWorksData()
+  const featuredWork = works[0] // 取最新一个作品作为入口
 
   // 收集所有标签
   const tagSet = new Set()
@@ -55,8 +38,8 @@ export default function Home() {
         <div className="header-divider" />
       </header>
 
-      {/* 学员作品专区 */}
-      {recentWorks.length > 0 && (
+      {/* 学员作品入口 — 只展示一张卡片 */}
+      {featuredWork && (
         <section className={styles.worksSection}>
           <div className={styles.worksHeader}>
             <div className={styles.worksTitle}>
@@ -67,35 +50,59 @@ export default function Home() {
               查看全部 →
             </Link>
           </div>
-          <div className={styles.worksGrid}>
-            {recentWorks.map(work => {
-              const embedUrl = getEmbedUrl(work.videoUrl)
-              return (
-                <article key={work.slug} className={styles.workCard}>
-                  <Link href="/works" className={styles.workThumb}>
-                    {embedUrl ? (
-                      <iframe
-                        src={embedUrl}
-                        scrolling="no"
-                        allowFullScreen
-                        title={work.title}
-                      />
-                    ) : (
-                      <div className={styles.workNoVideo}>暂无视频</div>
-                    )}
-                  </Link>
-                  <div className={styles.workInfo}>
-                    <h3 className={styles.workTitle}>
-                      <Link href="/works">{work.title}</Link>
-                    </h3>
-                    {work.student && (
-                      <p className={styles.workStudent}>{work.student}</p>
-                    )}
-                  </div>
-                </article>
-              )
-            })}
-          </div>
+
+          <Link href="/works" className={styles.featuredCard}>
+            {/* 封面图 */}
+            <div className={styles.featuredThumb}>
+              {featuredWork.coverImage ? (
+                <img
+                  src={featuredWork.coverImage}
+                  alt={featuredWork.title}
+                  className={styles.featuredImg}
+                />
+              ) : (
+                <div className={styles.featuredPlaceholder}>
+                  <span>🎬</span>
+                </div>
+              )}
+
+              {/* 播放按钮 */}
+              <div className={styles.playOverlay}>
+                <div className={styles.playBtn}>
+                  <span className={styles.playIcon}>▶</span>
+                  <span className={styles.playLabel}>观看作品</span>
+                </div>
+              </div>
+
+              {/* 作品数标签 */}
+              <div className={styles.worksCount}>
+                <span>{works.length} 个作品</span>
+              </div>
+            </div>
+
+            {/* 文字信息 */}
+            <div className={styles.featuredInfo}>
+              <div>
+                <span className={styles.featuredTag}>
+                  {featuredWork.category || '视频作品'}
+                </span>
+                <h3 className={styles.featuredTitle}>{featuredWork.title}</h3>
+                {featuredWork.student && (
+                  <p className={styles.featuredStudent}>
+                    <span className={styles.dot} />
+                    {featuredWork.student}
+                  </p>
+                )}
+                {featuredWork.description && (
+                  <p className={styles.featuredDesc}>{featuredWork.description}</p>
+                )}
+              </div>
+              <div className={styles.featuredMeta}>
+                <span>{featuredWork.dateStr}</span>
+                <span className={styles.cta}>点击观看 →</span>
+              </div>
+            </div>
+          </Link>
         </section>
       )}
 
