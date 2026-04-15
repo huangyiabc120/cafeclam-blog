@@ -8,9 +8,8 @@ import styles from './home-works.module.css'
 export default function Home() {
   const allPosts = getSortedPostsData()
   const works = getSortedWorksData()
-  const featuredWork = works[0] // 取最新一个作品作为入口
+  const featuredWork = works[0]
 
-  // 收集所有标签
   const tagSet = new Set()
   allPosts.forEach(post => {
     if (Array.isArray(post.tags)) {
@@ -21,7 +20,6 @@ export default function Home() {
 
   return (
     <>
-      {/* 顶部横幅 */}
       <div className="home-banner">
         <img src="/images/header.jpg" alt="博客横幅" className="home-banner-img" />
       </div>
@@ -38,7 +36,7 @@ export default function Home() {
         <div className="header-divider" />
       </header>
 
-      {/* 学员作品入口 — 只展示一张卡片 */}
+      {/* 学员作品入口 — 一张大封面 */}
       {featuredWork && (
         <section className={styles.worksSection}>
           <div className={styles.worksHeader}>
@@ -46,13 +44,9 @@ export default function Home() {
               <span className={styles.worksEyebrow}>🎬 学员作品</span>
               <h2>往期作品</h2>
             </div>
-            <Link href="/works" className={styles.worksMore}>
-              查看全部 →
-            </Link>
           </div>
 
           <Link href="/works" className={styles.featuredCard}>
-            {/* 封面图 */}
             <div className={styles.featuredThumb}>
               {featuredWork.coverImage ? (
                 <img
@@ -66,21 +60,14 @@ export default function Home() {
                 </div>
               )}
 
-              {/* 播放按钮 */}
               <div className={styles.playOverlay}>
                 <div className={styles.playBtn}>
                   <span className={styles.playIcon}>▶</span>
                   <span className={styles.playLabel}>观看作品</span>
                 </div>
               </div>
-
-              {/* 作品数标签 */}
-              <div className={styles.worksCount}>
-                <span>{works.length} 个作品</span>
-              </div>
             </div>
 
-            {/* 文字信息 */}
             <div className={styles.featuredInfo}>
               <div>
                 <span className={styles.featuredTag}>
